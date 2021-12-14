@@ -2,7 +2,7 @@ import Reac, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
-import { getGithubRepos, getGithubRepos } from "../../actions/profile";
+import { getGithubRepos } from "../../actions/profile";
 
 const ProfileGithub = ({ username, fetGithubRepos, repos }) => {
   useEffect(() => {
@@ -46,7 +46,7 @@ const ProfileGithub = ({ username, fetGithubRepos, repos }) => {
 };
 
 ProfileGithub.propTypes = {
-  fetGithubRepos: PropTypes.func.isRequired,
+  getGithubRepos: PropTypes.func.isRequired,
   repos: PropTypes.array.isRequired,
   username: PropTypes.string.isRequired,
 };
@@ -55,4 +55,4 @@ const mapStateToProps = (state) => ({
   repos: state.profile.repos,
 });
 
-export default connect(mapStateToProps, { fetGithubRepos })(ProfileGithub);
+export default connect(mapStateToProps, { getGithubRepos })(ProfileGithub);
