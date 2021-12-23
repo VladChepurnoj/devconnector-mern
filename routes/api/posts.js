@@ -4,7 +4,6 @@ const { check, validationResult } = require("express-validator");
 const auth = require("../../middleware/auth");
 
 const Post = require("../../models/Post");
-const Profile = require("../../models/Profile");
 const User = require("../../models/User");
 
 //@route    POST api/posts
@@ -12,7 +11,8 @@ const User = require("../../models/User");
 //@access   Private
 router.post(
   "/",
-  [auth, check("text", "Text is required").not().isEmpty()],
+  auth,
+  check("text", "Text is required").not().isEmpty(),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -119,7 +119,7 @@ router.put("/like/:id", auth, async (req, res) => {
 
     await post.save();
 
-    res.json(post.likes);
+    return res.json(post.likes);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
